@@ -28,7 +28,7 @@ class App extends React.Component {
 
   componentDidMount(){
       axios
-      .get("./notess.json").then(response=> {
+      .get("./notes.json").then(response=> {
         if (response.status === 200 && response.data) {
           this.setState({notes: response.data})
         }
