@@ -10,6 +10,7 @@ import NotesList from './NotesList.js';
 import Home from './Home.js'
 import Note from './Note.js'
 // React router
+/* Tenemos que agregar lo que vayamos usar en router aqui */
 import {Link, Route, Redirect} from "react-router-dom";
 
 class App extends React.Component {
@@ -63,6 +64,8 @@ deleteNote = (id) =>{
                   <NotesForm updateField={this.updateField} descirption={this.state.descirption} title={this.state.title} saveNote={this.saveNote}/>
                 }/>
               <Route path='/view/:id' render={props =>{
+                  {/* Redirect nos sirve para regresar al host 3000 pagina inicio u otra pagina */}
+                  {/* props son las properties de route */}
                 const note= this.state.notes.filter(
                   note => note.id === parseInt(props.match.params.id)
                 )[0];
@@ -73,6 +76,7 @@ deleteNote = (id) =>{
                 }
                 }}
               />
+
             </Grid>
         </Grid>
         <Link to="/add">
