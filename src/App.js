@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import './index.css';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +26,16 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount(){
+      axios
+      .get("./notess.json").then(response=> {
+        if (response.status === 200 && response.data) {
+          this.setState({notes: response.data})
+        }
+      })
+      .catch( err => console.log(err))
+  }
+
 updateField = field =>(e)=>{
   this.setState({
     [field]: e.target.value
@@ -47,6 +58,8 @@ deleteNote = (id) =>{
   this.setState({notes: this.state.notes.filter(note => note.id !== id)})
 
 }
+
+
 
   render(){
     console.log(this.state);
