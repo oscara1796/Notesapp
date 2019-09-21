@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Link} from "react-router-dom";
 
-const NoteList = ({notes}) =>{
+const NoteList = ({notes, deleteNote}) =>{
   return notes.length ?(
     <List>
       {
@@ -18,7 +18,7 @@ const NoteList = ({notes}) =>{
             <ListItem button key={note.id} component={Link} to={`/view/${note.id}`}>
               <ListItemText primary= {note.title} secondary={moment(note.id).format("MMM Do YY")}/>
               <ListItemSecondaryAction>
-              <IconButton >
+              <IconButton  onClick={() => deleteNote(note.id)}>
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>

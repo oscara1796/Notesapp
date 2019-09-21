@@ -3,9 +3,9 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-const Note= (props) =>{
-  console.log(props);
-  const note= props.notes.filter(note => note.id === parseInt(props.match.params.id))[0];
+const Note= ({note}) =>{
+
+
   return(
     <React.Fragment>
       <Typography align="center" variant="h4" gutterBottom>

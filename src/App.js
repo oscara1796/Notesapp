@@ -10,7 +10,7 @@ import NotesList from './NotesList.js';
 import Home from './Home.js'
 import Note from './Note.js'
 // React router
-import {Link, Route} from "react-router-dom";
+import {Link, Route, Redirect} from "react-router-dom";
 
 class App extends React.Component {
   constructor(props){
@@ -40,11 +40,10 @@ saveNote = () => {
 
 
 
-// deleteNote = (note) =>{
-//   this.setState({
-//     notes: this.state.notes.filter((_,i) => note.id !== i.id )
-//   })
-// }
+deleteNote = (id) =>{
+  this.setState({notes: this.state.notes.filter(note => note.id !== id)})
+
+}
 
   render(){
     console.log(this.state);
@@ -55,7 +54,7 @@ saveNote = () => {
         </Typography>
         <Grid container justify="center" spacing={2}>
             <Grid item xs={4}>
-              <NotesList notes={this.state.notes} />
+              <NotesList notes={this.state.notes} deleteNote={this.deleteNote}/>
             </Grid>
             <Grid item xs={8}>
               <Route exact path="/" component={Home}/>
@@ -63,7 +62,17 @@ saveNote = () => {
               <Route path='/add' render={() =>
                   <NotesForm updateField={this.updateField} descirption={this.state.descirption} title={this.state.title} saveNote={this.saveNote}/>
                 }/>
-              <Route path='/view/:id' render={props => <Note {...props} notes={this.state.notes} />}/>
+              <Route path='/view/:id' render={props =>{
+                const note= this.state.notes.filter(
+                  note => note.id === parseInt(props.match.params.id)
+                )[0];
+                if (note){
+                  return <Note  note={note} />
+                }else{
+                  return <Redirect to="/" />
+                }
+                }}
+              />
             </Grid>
         </Grid>
         <Link to="/add">
