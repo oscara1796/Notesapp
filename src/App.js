@@ -13,6 +13,8 @@ import Note from './Note.js'
 /* Tenemos que agregar lo que vayamos usar en router aqui */
 import {Link, Route, Redirect} from "react-router-dom";
 
+// Comentario
+
 class App extends React.Component {
   constructor(props){
     super(props);
